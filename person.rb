@@ -1,4 +1,6 @@
-class Person
+require_relative 'Nameable'
+
+class Person < Nameable
   attr_accessor :id, :name, :age, :parent_permission
 
   def initialize(age, name: 'unknown', parent_permission: true)
