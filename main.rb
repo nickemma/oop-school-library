@@ -1,5 +1,5 @@
 require_relative 'person'
-require_relative 'decorator'
+require_relative 'decorate'
 
 person = Person.new(10, 'lazycoders')
 puts person.correct_name
