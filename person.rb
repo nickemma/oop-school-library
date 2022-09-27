@@ -17,7 +17,7 @@ class Person < Nameable
     @rentals.push(rental)
     rental.person = self
   end
-  
+
   def correct_name
     @name
   end
