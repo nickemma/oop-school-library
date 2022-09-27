@@ -1,21 +1,21 @@
-
-require_relative 'Nameable'
+require_relative 'nameable'
 
 class Person < Nameable
-  attr_accessor :id, :name, :age, :parent_permission
+  attr_accessor :name, :age
+  attr_reader :id, :rentals
 
   def initialize(age, name, parent_permission: true)
     super()
-=======
-class Person
-  attr_accessor id: :name, :age, :parent_permission
-
-  def initialize(age, name = 'unknown', parent_permission: true)
-
     @id = Random.rand(1...1000)
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental)
+    rental.person = self
   end
 
   def correct_name
