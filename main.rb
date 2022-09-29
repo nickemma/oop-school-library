@@ -1,14 +1,14 @@
 require_relative 'app'
 
 def main
- puts 'Welcome to School library App!'
- app = App.new
- app.run
+  puts "Welcome to School library App!\n"
+  app = App.new
+  app.run
 end
 
 def list_holder(option)
- case option
-   when 1
+  case option
+  when 1
     list_all_books
   when 2
     list_all_people
@@ -23,15 +23,32 @@ def list_holder(option)
   end
 end
 
+def extra_options(option)
+  case option
+  when 7
+    list_all_students
+  when 8
+    list_all_teachers
+  when 9
+    Exit
+  end
+end
+
 def display_list
- puts 'Please choose an option by entering a number:'
- puts '1 - List all books'
- puts '2 - List all people'
- puts '3 - Create a person'
- puts '4 - Create a book'
- puts '5 - Create a rental'
- puts '6 - List all rentals for a given person id'
- option = gets.chomp.to_i
- list_holder(option)
+  puts "Please choose an option by entering a number from below:\n"
+  puts '1 - List all books'
+  puts '2 - List all people'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
+  puts '7 - list_all_students'
+  puts '8 - list_all_teachers'
+  puts '9 - Exit'
+
+  option = gets.chomp.to_i
+  list_holder(option)
+  extra_options(option)
+  display_list
 end
 main
