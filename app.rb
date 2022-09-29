@@ -36,4 +36,46 @@ class App
   end
  end
 
+ def create_person
+  puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
+  person_type = gets.chomp
+  case person_type
+  when '1'
+    create_student
+  when '2'
+    create_teacher
+  else
+    puts 'Invalid option'
+    create_person
+  end
+ end
+
+ def create_student(age, name, classroom, parent_permission)
+  student = Student.new(age, name, classroom, parent_permission: parent_permission)
+  @people << student unless @people.include?(student)
+  @students << student unless @students.include?(student)
+ end
+
+ def create_teacher
+  puts 'Age:'
+  age = gets.chomp
+  puts 'Name:'
+  name = gets.chomp
+  puts 'Specialization:'
+  specialization = gets.chomp
+  teacher = Teacher.new(age, specialization, name)
+  @people << teacher unless @people.include?(teacher)
+  puts 'Person created successfully'
+ end
+
+ def create_book
+  puts 'Enter the title of the book:'
+  title = gets.chomp
+  puts 'Enter the author of the book:'
+  author = gets.chomp
+  book = Book.new(title, author)
+  puts "The book \'#{title}\' by #{author} is created successfully!"
+  @book_list << book unless @book_list.include?(book)
+ end
+
 end
