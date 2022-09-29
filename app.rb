@@ -76,18 +76,6 @@ class App
   puts "The Teacher named '#{name}' of age #{age} with the specialization #{specialization} was created successfully!"
  end
 
- # def create_student(age, name, classroom, parent_permission)
- #  student = Student.new(age, name, classroom, parent_permission: parent_permission)
- #  @people << student unless @people.include?(student)
- #  @students << student unless @students.include?(student)
- # end
-
- # def create_teacher(age, name, specialization)
- #  teacher = Teacher.new(age, name, specialization)
- #  @people << teacher unless @people.include?(teacher)
- #  @teachers << teacher unless @teachers.include?(teacher)
- # end
-
  def create_book
   puts 'Enter the title of the book:'
   title = gets.chomp

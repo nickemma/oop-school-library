@@ -19,11 +19,11 @@ def list_holder
   when 5
     create_rental
   when 6
-    List all rentals for a given person id
+    list_all_rentals
   end
 end
 
-def display_list
+def display_list(option)
     puts 'Once again you are Welcome!'
     puts "
       Choose an option by entering a number:
