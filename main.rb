@@ -6,7 +6,7 @@ def main
  app.run
 end
 
-def list_holder
+def list_holder(option)
  case option
    when 1
     list_all_books
@@ -23,19 +23,15 @@ def list_holder
   end
 end
 
-def display_list(option)
-    puts 'Once again you are Welcome!'
-    puts "
-      Choose an option by entering a number:
-      1 - List all books
-      2 - List all people
-      3 - Create a person
-      4 - Create a book
-      5 - Create a rental
-      6 - List all rentals for a given person id
-      7 - Exit"
-
-    option = gets.chomp.to_i
-    list_holder
+def display_list
+ puts 'Please choose an option by entering a number:'
+ puts '1 - List all books'
+ puts '2 - List all people'
+ puts '3 - Create a person'
+ puts '4 - Create a book'
+ puts '5 - Create a rental'
+ puts '6 - List all rentals for a given person id'
+ option = gets.chomp.to_i
+ list_holder(option)
 end
 main
