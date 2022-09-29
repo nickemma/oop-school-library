@@ -9,7 +9,7 @@ end
 def list_holder(option)
   case option
   when 1
-    list_all_books 
+    list_all_books
   when 2
     list_all_people
   when 3
@@ -29,7 +29,6 @@ def extra_options(option)
     list_all_students
   when 8
     list_all_teachers
-  when 9
   end
 end
 

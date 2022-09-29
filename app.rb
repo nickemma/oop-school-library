@@ -34,7 +34,9 @@ class App
     if @people.empty?
       puts 'There are no people in the library'
     else
-      @people.each_with_index { |person, i| puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      @people.each_with_index do |person, i|
+        puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
     end
   end
 
@@ -111,7 +113,7 @@ class App
 
   # ========= check the name and date of rentals ========
   def list_all_rentals
-    puts 'ID of person:'
+    print 'ID of person:'
     person_id = gets.chomp.to_i
     rentals = @rentals.filter { |rental| rental.person.id == person_id }
     puts 'Rentals:'
