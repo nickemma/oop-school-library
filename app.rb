@@ -68,7 +68,7 @@ class App
     student = Student.new(age, name, parent_permission)
     @people << student unless @people.include?(student)
     @students << student unless @students.include?(student)
-    puts 'Student created successfully!'
+    puts 'Student created successfully!😊'
   end
 
   # ========= create teacher ==========
@@ -82,7 +82,7 @@ class App
     teacher = Teacher.new(age, specialization, name)
     @people << teacher unless @people.include?(teacher)
     @teachers << teacher unless @teachers.include?(teacher)
-    puts 'Teacher created successfully!'
+    puts 'Teacher created successfully!😊'
   end
 
   # ========= create books ========
@@ -92,7 +92,7 @@ class App
     print 'Author: '
     author = gets.chomp
     book = Book.new(title, author)
-    puts "The book \'#{title}\' by #{author} was created successfully!"
+    puts "The book \'#{title}\' by #{author} was created successfully!📖"
     @books_list << book unless @books_list.include?(book)
   end
 
@@ -107,7 +107,7 @@ class App
     puts 'Enter a date: e.g 2022/09/28'
     date = gets.chomp
     rental = Rental.new(date, books_list[book_index], people[person_index])
-    puts 'Rental successfully created!'
+    puts 'Rental successfully created!📅'
     @rentals << rental unless @rentals.include?(rental)
   end
 
@@ -120,22 +120,4 @@ class App
     rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" }
   end
 
-  # =========== show all the students ==========
-  def list_all_students
-    if @students.empty?
-      puts 'There are no students in the library'
-    else
-      @students.each { |student| puts "Name: #{student.name}, ID: #{student.id}, Age: #{student.age}" }
-    end
-  end
-
-  # =========== show all the teachers ===========
-
-  def list_all_teachers
-    if @teachers.empty?
-      puts 'There are no teachers in the library'
-    else
-      @teachers.each { |teacher| puts "Name: #{teacher.name}, ID: #{teacher.id}, Age: #{teacher.age}" }
-    end
-  end
 end
