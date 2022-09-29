@@ -15,4 +15,17 @@ class App
    @students = []
    @teachers = []
  end
+
+ def run
+   display_list
+ end
+
+ def list_all_books
+  if @books.empty?
+    puts 'There are no books in the library'
+  else
+    @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
+  end
+ end
+
 end
