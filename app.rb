@@ -25,7 +25,7 @@ class App
     if @books_list.empty?
       puts 'There are no books in the library'
     else
-      @books_list.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
+      @books_list.each_with_index { |book, i| puts "#{i}) Title: '#{book.title}', Author: #{book.author}" }
     end
   end
 
@@ -34,7 +34,7 @@ class App
     if @people.empty?
       puts 'There are no people in the library'
     else
-      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      @people.each_with_index { |person, i| puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
   end
 
@@ -103,23 +103,19 @@ class App
     list_all_people
     person_index = gets.chomp.to_i
     puts 'Enter a date: e.g 2022/09/28'
-    date = gets.chomp.to_i
-    rental = Rental.new(date, people[person_index], books_list[book_index])
+    date = gets.chomp
+    rental = Rental.new(date, books_list[book_index], people[person_index])
     puts 'Rental successfully created!'
     @rentals << rental unless @rentals.include?(rental)
   end
 
   # ========= check the name and date of rentals ========
-  def list_rentals_for_person_id
-    puts 'Enter the ID of the person: '
+  def list_all_rentals_for_person_id
+    puts 'ID of person:'
     id = gets.chomp.to_i
-    puts 'Rentals: '
-    if @rentals.empty?
-      puts 'There are no rentals for this person '
-    else
-      @rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
-      end
+    puts 'Rentals:'
+    @rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
   end
 

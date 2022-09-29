@@ -9,7 +9,7 @@ end
 def list_holder(option)
   case option
   when 1
-    list_all_books
+    list_all_books 
   when 2
     list_all_people
   when 3
@@ -30,7 +30,6 @@ def extra_options(option)
   when 8
     list_all_teachers
   when 9
-    Exit
   end
 end
 
@@ -49,6 +48,11 @@ def display_list
   option = gets.chomp.to_i
   list_holder(option)
   extra_options(option)
-  display_list
+  if option == 9
+    puts 'Thank you for using this app'
+  else
+    display_list
+  end
 end
+
 main
