@@ -19,8 +19,26 @@ def list_holder
   when 5
     create_rental
   when 6
-    list_rentals_by_id
+    List all rentals for a given person id
   end
 end
+
+def display_list
+    puts 'Once again you are Welcome!'
+    puts "
+      Choose an option by entering a number:
+      1 - List all books
+      2 - List all people
+      3 - Create a person
+      4 - Create a book
+      5 - Create a rental
+      6 - List all rentals for a given person id
+      7 - Exit"
+
+    option = gets.chomp.to_i
+    list_holder
+end
+
+
 
 main
