@@ -50,17 +50,43 @@ class App
   end
  end
 
- def create_student(age, name, classroom, parent_permission)
-  student = Student.new(age, name, classroom, parent_permission: parent_permission)
+ def create_student
+  puts 'Age:'
+  age = gets.chomp.to_i
+  puts 'Name:'
+  name = gets.chomp
+  puts 'Has parent permission? [Y/N]'
+  parent_permission = gets.chomp
+  parent_permission = parent_permission.downcase == 'y'
+  parent_permission = parent_permission.downcase == 'n'
+  student = Student.new(age, name, parent_permission)
   @people << student unless @people.include?(student)
-  @students << student unless @students.include?(student)
+  puts "The student named '#{name}' of age #{age} with the classroom number #{classroom} was created successfully!"
  end
 
- def create_teacher(age, name, specialization)
-  teacher = Teacher.new(age, name, specialization)
+ def create_teacher
+  puts 'Age:'
+  age = gets.chomp.to_i
+  puts 'Name:'
+  name = gets.chomp
+  puts 'Specialization:'
+  specialization = gets.chomp
+  teacher = Teacher.new(age, specialization, name)
   @people << teacher unless @people.include?(teacher)
-  @teachers << teacher unless @teachers.include?(teacher)
+  puts "The Teacher named '#{name}' of age #{age} with the specialization #{specialization} was created successfully!"
  end
+
+ # def create_student(age, name, classroom, parent_permission)
+ #  student = Student.new(age, name, classroom, parent_permission: parent_permission)
+ #  @people << student unless @people.include?(student)
+ #  @students << student unless @students.include?(student)
+ # end
+
+ # def create_teacher(age, name, specialization)
+ #  teacher = Teacher.new(age, name, specialization)
+ #  @people << teacher unless @people.include?(teacher)
+ #  @teachers << teacher unless @teachers.include?(teacher)
+ # end
 
  def create_book
   puts 'Enter the title of the book:'
