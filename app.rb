@@ -56,16 +56,10 @@ class App
   @students << student unless @students.include?(student)
  end
 
- def create_teacher
-  puts 'Age:'
-  age = gets.chomp
-  puts 'Name:'
-  name = gets.chomp
-  puts 'Specialization:'
-  specialization = gets.chomp
-  teacher = Teacher.new(age, specialization, name)
+ def create_teacher(age, name, specialization)
+  teacher = Teacher.new(age, name, specialization)
   @people << teacher unless @people.include?(teacher)
-  puts 'Person created successfully'
+  @teachers << teacher unless @teachers.include?(teacher)
  end
 
  def create_book
@@ -76,6 +70,33 @@ class App
   book = Book.new(title, author)
   puts "The book \'#{title}\' by #{author} is created successfully!"
   @book_list << book unless @book_list.include?(book)
+ end
+
+ def create_rental
+  puts 'select a book from the following list by number'
+  list_all_books
+  book_index = gets.chomp.to_i
+  puts 'select a person from the following list by number (not id)'
+  list_all_people
+  person_index = gets.chomp.to_i
+  puts 'Enter the date of the rental: e.g 2022/09/28:'
+  date = gets.chomp
+  rental << Rental.new(date, @people[person_index], @books[book_index])
+  puts 'Rental created successfully'
+  @rentals << rental unless @rentals.include?(rental)
+ end
+
+ def list_rentals_for_person_id
+  puts 'Enter the ID of the person:'
+  id = gets.chomp.to_i
+  puts 'Rentals:'
+  if @rentals.empty?
+    puts 'There are no rentals for this person'
+  else
+    @rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+    end
+  end
  end
 
 end
