@@ -38,7 +38,4 @@ def display_list
     option = gets.chomp.to_i
     list_holder
 end
-
-
-
 main
