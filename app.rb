@@ -110,13 +110,12 @@ class App
   end
 
   # ========= check the name and date of rentals ========
-  def list_all_rentals_for_person_id
+  def list_all_rentals
     puts 'ID of person:'
-    id = gets.chomp.to_i
+    person_id = gets.chomp.to_i
+    rentals = @rentals.filter { |rental| rental.person.id == person_id }
     puts 'Rentals:'
-    @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
-    end
+    rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" }
   end
 
   # =========== show all the students ==========
