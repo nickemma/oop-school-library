@@ -2,46 +2,26 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
-require_relative 'storage'
-
-class App
-  attr_accessor :books_list, :people
-  include Storage
-
+require_relative 'list'
+require 'json'
+require './data'
+class App < List
+  attr_accessor :books, :people
   def initialize
-    @books_list = []
+    # super()
+    @books = []
     @people = []
     @rentals = []
-    @students = []
-    @teachers = []
-    load_all
+    # @students = []
+    # @teachers = []
+    # Data.new
   end
 
   def run
     display_list
   end
 
-  # ======= show list all the books =======
-  def list_all_books
-    if @books_list.empty?
-      puts 'There are no books in the library'
-    else
-      @books_list.each_with_index { |book, i| puts "#{i}) Title: '#{book.title}', Author: #{book.author}" }
-    end
-  end
-
-  # ======= show list all the peoples =======
-  def list_all_people
-    if @people.empty?
-      puts 'There are no people in the library'
-    else
-      @people.each_with_index do |person, i|
-        puts "#{i}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
-    end
-  end
-
-  # ======== Create person =======
+   # ======== Create person =======
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp
@@ -56,68 +36,42 @@ class App
     end
   end
 
-  # ======== create student =======
-  def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N] '
-    parent_permission = gets.chomp
-    parent_permission = true if parent_permission == 'y'
-    parent_permission = false if parent_permission == 'n'
-    student = Student.new(age, name, parent_permission)
-    @people << student unless @people.include?(student)
-    @students << student unless @students.include?(student)
-    puts 'Student created successfully!😊'
+  # ======== Load books=======
+  
+  def load_books
+    return unless File.exist?('./books.json')
+
+    books = JSON.parse(File.read('./books.json'))
+    print books.class
+    books.each do |book|
+      @books << Book.new(title: book['title'], author: book['author'])
+    end
   end
 
-  # ========= create teacher ==========
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    teacher = Teacher.new(age, specialization, name)
-    @people << teacher unless @people.include?(teacher)
-    @teachers << teacher unless @teachers.include?(teacher)
-    puts 'Teacher created successfully!😊'
-  end
+  # ========load people ========
+  def load_people
+    return unless File.exist?('./people.json')
 
-  # ========= create books ========
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    book = Book.new(title, author)
-    puts "The book \'#{title}\' by #{author} was created successfully!📖"
-    @books_list << book unless @books_list.include?(book)
+    people = JSON.parse(File.read('./people.json'))
+    people.each do |person|
+      @people <<
+        if person['parent_permission']
+          Student.new(age: person['age'], name: person['name'],
+          parent_permission: person['parent_permission'])
+        else
+          Teacher.new(age: person['age'], specialization: person['specialization'], name: person['name'])
+        end
+    end
   end
+# =======Load retals =========
+  def load_rentals
+    return unless File.exist?('./rentals.json')
 
-  # ======== create rentals ========
-  def create_rental
-    puts "Select a book from the following list by number:\n"
-    list_all_books
-    book_index = gets.chomp.to_i
-    puts "Select a person from the following list by number:\n"
-    list_all_people
-    person_index = gets.chomp.to_i
-    puts 'Enter a date: [yyyy-mm-dd]'
-    date = gets.chomp
-    rental = Rental.new(date, books_list[book_index], people[person_index])
-    puts 'Rental successfully created!📅'
-    @rentals << rental unless @rentals.include?(rental)
-  end
-
-  # ========= check the name and date of rentals ========
-  def list_all_rentals
-    print 'ID of person:'
-    person_id = gets.chomp.to_i
-    rentals = @rentals.filter { |rental| rental.person.id == person_id }
-    puts 'Rentals:'
-    rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" }
+    rentals = JSON.parse(File.read('./rentals.json'))
+    rentals.each do |rental|
+      @rentals << Rental.new(date: rental['date'],
+      person: @people.select { |person| person.name == rental['person'] }.first,
+      book: @books.select { |book| book.title == rental['book'] }.first)
+    end
   end
 end
