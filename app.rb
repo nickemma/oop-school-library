@@ -16,9 +16,9 @@ class App
     @teachers = []
   end
 
-  def run
-    display_list
-  end
+ def run 
+  display_list
+ end
 
   # ======= show list all the books =======
   def list_all_books
