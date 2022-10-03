@@ -28,7 +28,7 @@ Imagine that you are the librarian of OOP University, and you need a tool to rec
 
 - On the command line, at the project's root, run `bundle install` to install app dependencies
 
-- Next, run `ruby morse_decode.rb` which will run the app in the development mode.
+- Next, run `ruby main.rb` which will run the app in the development mode.
 
 ## Authors
 

@@ -104,7 +104,7 @@ class App
     puts "Select a person from the following list by number:\n"
     list_all_people
     person_index = gets.chomp.to_i
-    puts 'Enter a date: e.g 2022/09/28'
+    puts 'Enter a date: [yyyy-mm-dd]'
     date = gets.chomp
     rental = Rental.new(date, books_list[book_index], people[person_index])
     puts 'Rental successfully created!📅'
