@@ -16,9 +16,9 @@ class App
     @teachers = []
   end
 
- def run 
-  display_list
- end
+  def run
+    display_list
+  end
 
   # ======= show list all the books =======
   def list_all_books
@@ -119,5 +119,4 @@ class App
     puts 'Rentals:'
     rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" }
   end
-
 end
