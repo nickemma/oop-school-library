@@ -1,4 +1,5 @@
 require_relative 'refactor'
+require 'json'
 
 def main
   puts 'Welcome to School Library App!'

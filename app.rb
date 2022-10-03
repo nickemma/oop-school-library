@@ -7,21 +7,22 @@ require 'json'
 require './data'
 class App < List
   attr_accessor :books, :people
+
   def initialize
-    # super()
+    super()
     @books = []
     @people = []
     @rentals = []
     # @students = []
     # @teachers = []
-    # Data.new
+    Data.new
   end
 
   def run
     display_list
   end
 
-   # ======== Create person =======
+  # ======== Create person =======
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp
@@ -37,7 +38,7 @@ class App < List
   end
 
   # ======== Load books=======
-  
+
   def load_books
     return unless File.exist?('./books.json')
 
@@ -57,21 +58,24 @@ class App < List
       @people <<
         if person['parent_permission']
           Student.new(age: person['age'], name: person['name'],
-          parent_permission: person['parent_permission'])
+                      parent_permission: person['parent_permission'])
         else
           Teacher.new(age: person['age'], specialization: person['specialization'], name: person['name'])
         end
     end
   end
-# =======Load retals =========
+
+  # =======Load retals =========
   def load_rentals
     return unless File.exist?('./rentals.json')
 
     rentals = JSON.parse(File.read('./rentals.json'))
     rentals.each do |rental|
       @rentals << Rental.new(date: rental['date'],
-      person: @people.select { |person| person.name == rental['person'] }.first,
-      book: @books.select { |book| book.title == rental['book'] }.first)
+                             person: @people.select do |person|
+                                       person.name == rental['person']
+                                     end.first,
+                             book: @books.select { |book| book.title == rental['book'] }.first)
     end
   end
 end
