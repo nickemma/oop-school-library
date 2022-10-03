@@ -38,6 +38,13 @@ Imagine that you are the librarian of OOP University, and you need a tool to rec
 - Twitter: [@techieEmma](https://twitter.com/techieEmma)
 - LinkedIn: [@Nicholas Emmanuel](https://www.linkedin.com/in/techieemma/)
 
+👤 **yayner**
+
+- GitHub: [@yayner2002](https://github.com/yayner2002)
+- Twitter: [@wediagazian](https://twitter.com/wediagazian)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/yaynshet-medhin)
+
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
