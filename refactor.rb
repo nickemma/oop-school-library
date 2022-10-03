@@ -8,17 +8,17 @@ class Refactor
 def list_holder(option)
   case option
   when 1
-    @list_all_books
+    @app.list_all_books
   when 2
-    @list_all_people
+    @app.list_all_people
   when 3
-    @create_person
+    @app.create_person
   when 4
-    @create_book
+    @app.create_book
   when 5
-    @create_rental
+    @app.create_rental
   when 6
-    @list_all_rentals
+    @app.list_all_rentals
   end
 end
 
