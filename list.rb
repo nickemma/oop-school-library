@@ -90,31 +90,21 @@ class List
     rental = Rental.new(date, books[book_index], people[person_index])
     @rentals << rental
     save = []
-    @rentals.each do |rent|
-      save << { date: rent.date, book: rent.book.title, author: rent.book.author }
+    @rentals.each do |rental|
+      save << { date: rental.date, book: rental.book.title, person: rental.person.name }
     end
     save_rental = JSON.generate(save)
-    File.write('./rentals.json', save_rental.to_s)
-    puts "Rental successfully created!📅\n"
+    File.write('./rentals.json', save_rental)
+    puts "Rental created successfully!📚\n"
   end
 
   # ========= check the name and date of rentals ========
   def list_all_rentals
-    print 'ID of person:'
-    person_id = gets.chomp.to_i
-    rentals = @rentals.filter { |rental| rental.person.id == person_id }
+    puts 'Enter ID of person: '
+    id = gets.chomp.to_i
     puts 'Rentals:'
-    rentals.each do |rental|
-      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by Author: '#{rental.book.author}'"
+    @rentals.each do |rental| # shadowing outer `foo`
+      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
   end
 end
-
-# puts 'Rental successfully created!📅'
-# @rentals << rental unless @rentals.include?(rental)
-# puts "The book \'#{title}\' by #{author} was created successfully!📖"
-# @books << book unless @books.include?(book)
-# @people << student unless @people.include?(student)
-# @students << student unless @students.include?(student)
-# @people << teacher unless @people.include?(teacher)
-# @teachers << teacher unless @teachers.include?(teacher)

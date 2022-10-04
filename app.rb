@@ -13,9 +13,7 @@ class App < List
     @books = []
     @people = []
     @rentals = []
-    # @students = []
-    # @teachers = []
-    Data.new
+    # Data.new
   end
 
   def run
@@ -42,10 +40,10 @@ class App < List
   def load_books
     return unless File.exist?('./books.json')
 
-    books = JSON.parse(File.read('./books.json'))
-    print books.class
-    books.each do |book|
-      @books << Book.new(title: book['title'], author: book['author'])
+    file = File.read('./books.json')
+    data = JSON.parse(file)
+    data.each do |book|
+      @books << Book.new(book['title'], book['author'])
     end
   end
 
@@ -53,14 +51,14 @@ class App < List
   def load_people
     return unless File.exist?('./people.json')
 
-    people = JSON.parse(File.read('./people.json'))
-    people.each do |person|
+    file = File.read('./people.json')
+    data = JSON.parse(file)
+    data.each do |person|
       @people <<
         if person['parent_permission']
-          Student.new(age: person['age'], name: person['name'],
-                      parent_permission: person['parent_permission'])
+          Student.new(person['age'], person['name'], parent_permission: person['parent_permission'])
         else
-          Teacher.new(age: person['age'], specialization: person['specialization'], name: person['name'])
+          Teacher.new(person['age'], person['specialization'], person['name'])
         end
     end
   end
@@ -69,13 +67,14 @@ class App < List
   def load_rentals
     return unless File.exist?('./rentals.json')
 
-    rentals = JSON.parse(File.read('./rentals.json'))
-    rentals.each do |rental|
-      @rentals << Rental.new(date: rental['date'],
-                             person: @people.select do |person|
-                                       person.name == rental['person']
-                                     end.first,
-                             book: @books.select { |book| book.title == rental['book'] }.first)
+    file = File.read('./rentals.json')
+    data = JSON.parse(file)
+    data.each do |rental|
+      @rentals << Rental.new(rental['date'], @people.select do |person|
+                                               person.name == rental['person']
+                                             end.first, @books.select do |book|
+                                                          book.title == rental['book']
+                                                        end.first)
     end
   end
 end
