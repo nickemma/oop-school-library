@@ -16,6 +16,7 @@ class App < List
     # Data.new
   end
 
+  # app run method
   def run
     display_list
   end
