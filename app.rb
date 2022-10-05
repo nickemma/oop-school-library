@@ -13,7 +13,6 @@ class App < List
     @books = []
     @people = []
     @rentals = []
-    # Data.new
   end
 
   # app run method
