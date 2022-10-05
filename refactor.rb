@@ -1,8 +1,11 @@
 require_relative 'app'
-
+require 'json'
 class Refactor
   def initialize
     @app = App.new
+    @app.load_books
+    @app.load_people
+    @app.load_rentals
   end
 
   def list_holder(option)
