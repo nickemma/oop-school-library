@@ -30,15 +30,10 @@ class List
     parent_permission = true if parent_permission == 'y'
     parent_permission = false if parent_permission == 'n'
     student = Student.new(age, name, parent_permission)
-    if File.exist?('./people.json')
-      File.open('./people.json', 'r') do |file|
-        @people = JSON.parse(file.read)
-      end
-    end
     @people << student
     save = []
     @people.each do |person|
-      save << { name: person.name, id: person.id, age: person.age,}
+      save << { name: person.name, id: person.id, age: person.age }
     end
     save_teacher = JSON.pretty_generate(save)
     File.write('./people.json', save_teacher.to_s)
@@ -54,13 +49,6 @@ class List
     print 'Specialization: '
     specialization = gets.chomp
     teacher = Teacher.new(age, specialization, name)
-    if File.exist?('./people.json')
-      file = File.read('./people.json')
-      @people = JSON.parse(file)
-      @people.each do |person|
-        @people << { name: person.name, id: person.id, age: person.age }
-      end
-    end
     @people << teacher
     save = []
     @people.each do |person|
@@ -78,13 +66,6 @@ class List
     print 'Author: '
     author = gets.chomp
     book = Book.new(title, author)
-    if File.exist?('./books.json')
-      file = File.read('./books.json')
-      @books = JSON.parse(file)
-      @books.each do |book|
-        @books << { title: book.title, author: book.author }
-      end
-    end
     @books << book
     save = []
     @books.each do |bookk|
