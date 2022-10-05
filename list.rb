@@ -90,8 +90,8 @@ class List
     rental = Rental.new(date, books[book_index], people[person_index])
     @rentals << rental
     save = []
-    @rentals.each do |rental|
-      save << { date: rental.date, book: rental.book.title, person: rental.person.name }
+    @rentals.each do |rent|
+      save << { date: rent.date, book: rent.book.title, person: rent.person.name }
     end
     save_rental = JSON.generate(save)
     File.write('./rentals.json', save_rental)
