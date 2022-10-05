@@ -35,7 +35,7 @@ class List
     @people.each do |person|
       save << { name: person.name, id: person.id, age: person.age }
     end
-    save_teacher = JSON.generate(save)
+    save_teacher = JSON.pretty_generate(save)
     File.write('./people.json', save_teacher.to_s)
     puts "Student created successfully!😊\n"
   end
@@ -54,7 +54,7 @@ class List
     @people.each do |person|
       save << { name: person.name, id: person.id, age: person.age }
     end
-    save_teacher = JSON.generate(save)
+    save_teacher = JSON.pretty_generate(save)
     File.write('./people.json', save_teacher.to_s)
     puts "Teacher created successfully!😊\n"
   end
@@ -70,7 +70,7 @@ class List
     save = []
     @books.each do |bookk|
       save << { title: bookk.title, author: bookk.author }
-      save_book = JSON.generate(save)
+      save_book = JSON.pretty_generate(save)
       File.write('./books.json', save_book.to_s)
       puts "The book \'#{title}\' by #{author} was created successfully!📖\n"
     end
@@ -93,7 +93,7 @@ class List
     @rentals.each do |rent|
       save << { date: rent.date, book: rent.book.title, person: rent.person.name }
     end
-    save_rental = JSON.generate(save)
+    save_rental = JSON.pretty_generate(save)
     File.write('./rentals.json', save_rental)
     puts "Rental created successfully!📚\n"
   end
